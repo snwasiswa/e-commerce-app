@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 
@@ -14,6 +15,9 @@ class CategoryOfProducts(models.Model):
 
     def __str__(self):
         return self.category_name
+
+    def get_absolute_url(self):
+        return reverse('ecommerce:list_of_product_category', args=[self.slug])
 
 class Product(models.Model):
     """Model for products"""
@@ -33,5 +37,8 @@ class Product(models.Model):
 
     def __str__(self):
         return self.product_name
+
+    def get_absolute_url(self):
+        return reverse('ecommerce:single_product', args=[self.id, self.slug])
 
  
